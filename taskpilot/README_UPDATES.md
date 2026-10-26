@@ -66,23 +66,30 @@ Add to `.kiro/settings/mcp.json`:
 
 #### Option 2: Use with Claude Desktop
 
-Add to `claude_desktop_config.json`:
+Edit `claude_desktop_config.json` (macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`) and add an `mcpServers` entry next to any existing keys:
 
 ```json
 {
-  "preferences": { "...keep what is already here..." },
   "mcpServers": {
     "taskpilot": {
-      "command": "/Users/ticktix/.pyenv/versions/3.14.4/bin/python3",
+      "command": "/absolute/path/to/python3",
       "args": ["-m", "taskpilot.mcp_server.server"],
       "env": {
-        "PYTHONPATH": "/Users/ticktix/Desktop/projects/AI-Agent"
+        "PYTHONPATH": "/absolute/path/to/folder-containing-taskpilot"
       }
     }
   }
 }
-
 ```
+
+Replace the two placeholders for your machine:
+
+- `command` — the full path of the Python that has `mcp<2` installed. Find it with `which python3` (or `pyenv which python3`). Claude Desktop does not load your shell, so a bare `python` often fails.
+- `PYTHONPATH` — the folder that **contains** the `taskpilot/` directory (not `taskpilot/` itself).
+
+Then quit Claude Desktop completely (Cmd+Q) and reopen it.
+
+> The server uses the `mcp` 1.x API, so install it with `pip install "mcp<2"`.
 
 ### Install New Dependencies
 
