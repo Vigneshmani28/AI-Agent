@@ -70,14 +70,18 @@ Add to `claude_desktop_config.json`:
 
 ```json
 {
+  "preferences": { "...keep what is already here..." },
   "mcpServers": {
     "taskpilot": {
-      "command": "python",
+      "command": "/Users/ticktix/.pyenv/versions/3.14.4/bin/python3",
       "args": ["-m", "taskpilot.mcp_server.server"],
-      "cwd": "d:/Projects/AITraining"
+      "env": {
+        "PYTHONPATH": "/Users/ticktix/Desktop/projects/AI-Agent"
+      }
     }
   }
 }
+
 ```
 
 ### Install New Dependencies
